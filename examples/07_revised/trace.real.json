@@ -1,0 +1,59 @@
+{
+  "mode": "real",
+  "model": "qwen3.8-flash",
+  "variant": "revised",
+  "fail_tool": null,
+  "max_steps": 8,
+  "max_tools": 6,
+  "tool_calls": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "search_docs",
+      "basis": "用户询问报销期限，需检索相关制度文档。",
+      "parameters": {
+        "query": "报销期限多久？",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D01",
+            "title": "日常费用报销制度",
+            "version_date": "2025-04-10",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          }
+        ]
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 2,
+      "action": "read_passage",
+      "basis": "搜索命中《日常费用报销制度》片段，需读取原文以获取具体报销期限。",
+      "parameters": {
+        "doc_id": "D01",
+        "passage_id": "P1"
+      },
+      "tool_call": true,
+      "observation": {
+        "doc_id": "D01",
+        "version_date": "2025-04-10",
+        "passage_id": "P1",
+        "quote": "日常费用的报销期限为费用发生之日起 45 天，员工应在期限内提交申请。"
+      },
+      "next_action": "answer"
+    },
+    {
+      "step": 3,
+      "action": "answer",
+      "basis": "已读取原文片段，明确记载了日常费用报销的具体期限及起算条件，可直接回答用户问题。",
+      "observation": {
+        "status": "answered"
+      }
+    }
+  ],
+  "status": "answered"
+}

@@ -1,0 +1,59 @@
+{
+  "mode": "mock",
+  "model": "scripted-mock",
+  "variant": "clear",
+  "fail_tool": null,
+  "max_steps": 8,
+  "max_tools": 6,
+  "tool_calls": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "search_docs",
+      "basis": "结合对话历史确认追问对象是出差住宿发票。",
+      "parameters": {
+        "query": "出差 住宿 发票 返程",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D04",
+            "title": "差旅住宿材料说明",
+            "version_date": "2025-02-15",
+            "passage_id": "P1",
+            "summary": "说明出差住宿发票的提交期限。"
+          }
+        ]
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 2,
+      "action": "read_passage",
+      "basis": "检索结果中的 D04 需要核对原文。",
+      "parameters": {
+        "doc_id": "D04",
+        "passage_id": "P1"
+      },
+      "tool_call": true,
+      "observation": {
+        "doc_id": "D04",
+        "version_date": "2025-02-15",
+        "passage_id": "P1",
+        "quote": "出差住宿发票须在返程后 7 天内提交。"
+      },
+      "next_action": "answer"
+    },
+    {
+      "step": 3,
+      "action": "answer",
+      "basis": "已读取支持结论的条款。",
+      "observation": {
+        "status": "answered"
+      }
+    }
+  ],
+  "status": "answered"
+}

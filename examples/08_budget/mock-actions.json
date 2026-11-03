@@ -1,0 +1,18 @@
+[
+  {
+    "action": "search_docs",
+    "args": {
+      "query": "报销期限多久？",
+      "limit": 6
+    },
+    "basis": "根据问题查找相关资料。"
+  },
+  {
+    "action": "read_passage",
+    "args": {
+      "doc_id": "D01",
+      "passage_id": "P1"
+    },
+    "basis": "检索结果中的 D01 需要核对原文。"
+  }
+]

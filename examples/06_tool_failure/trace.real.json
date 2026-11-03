@@ -1,0 +1,79 @@
+{
+  "mode": "real",
+  "model": "qwen3.8-flash",
+  "variant": "clear",
+  "fail_tool": "read_passage",
+  "max_steps": 8,
+  "max_tools": 6,
+  "tool_calls": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "search_docs",
+      "basis": "用户询问报销期限，需检索相关制度文档。",
+      "parameters": {
+        "query": "报销期限多久？",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D01",
+            "title": "日常费用报销制度",
+            "version_date": "2025-01-10",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          }
+        ]
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 2,
+      "action": "read_passage",
+      "basis": "搜索命中日常费用报销制度，需读取原文以确认具体报销期限。",
+      "parameters": {
+        "doc_id": "D01",
+        "passage_id": "P1"
+      },
+      "tool_call": true,
+      "observation": {
+        "error": "原文读取工具暂时不可用。",
+        "type": "tool_error"
+      },
+      "next_action": "search_docs"
+    },
+    {
+      "step": 3,
+      "action": "search_docs",
+      "basis": "读取原文失败，尝试更换关键词重新搜索以获取其他可能的文档或片段。",
+      "parameters": {
+        "query": "费用报销 提交时限",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D01",
+            "title": "日常费用报销制度",
+            "version_date": "2025-01-10",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          }
+        ]
+      },
+      "next_action": "stop"
+    },
+    {
+      "step": 4,
+      "action": "stop",
+      "basis": "关键工具报错且没有足够原文支持答案，符合停止条件。",
+      "observation": {
+        "status": "tool_error"
+      }
+    }
+  ],
+  "status": "tool_error"
+}

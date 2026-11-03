@@ -1,0 +1,112 @@
+{
+  "mode": "mock",
+  "model": "scripted-mock",
+  "variant": "conflict",
+  "fail_tool": null,
+  "max_steps": 8,
+  "max_tools": 6,
+  "tool_calls": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "search_docs",
+      "basis": "根据问题查找相关资料。",
+      "parameters": {
+        "query": "报销期限多久？",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D01",
+            "title": "日常费用报销制度",
+            "version_date": "2025-01-10",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          },
+          {
+            "doc_id": "D02",
+            "title": "日常费用报销规则",
+            "version_date": "2025-03-01",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          }
+        ]
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 2,
+      "action": "read_passage",
+      "basis": "检索结果中的 D01 需要核对原文。",
+      "parameters": {
+        "doc_id": "D01",
+        "passage_id": "P1"
+      },
+      "tool_call": true,
+      "observation": {
+        "doc_id": "D01",
+        "version_date": "2025-01-10",
+        "passage_id": "P1",
+        "quote": "日常费用的报销期限为费用发生之日起 30 天，员工应在期限内提交申请。"
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 3,
+      "action": "read_passage",
+      "basis": "检索结果中的 D02 需要核对原文。",
+      "parameters": {
+        "doc_id": "D02",
+        "passage_id": "P1"
+      },
+      "tool_call": true,
+      "observation": {
+        "doc_id": "D02",
+        "version_date": "2025-03-01",
+        "passage_id": "P1",
+        "quote": "日常费用的报销期限为费用发生之日起 15 天，员工应在期限内提交申请。"
+      },
+      "next_action": "search_docs"
+    },
+    {
+      "step": 4,
+      "action": "search_docs",
+      "basis": "两条报销期限不同，补查适用范围和优先级。",
+      "parameters": {
+        "query": "报销 适用范围 优先级 替代",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D01",
+            "title": "日常费用报销制度",
+            "version_date": "2025-01-10",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          },
+          {
+            "doc_id": "D02",
+            "title": "日常费用报销规则",
+            "version_date": "2025-03-01",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          }
+        ]
+      },
+      "next_action": "ask_clarification"
+    },
+    {
+      "step": 5,
+      "action": "ask_clarification",
+      "basis": "补查未找到可以裁决冲突的规则。",
+      "observation": {
+        "status": "needs_clarification"
+      }
+    }
+  ],
+  "status": "needs_clarification"
+}

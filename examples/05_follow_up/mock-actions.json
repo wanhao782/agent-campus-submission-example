@@ -1,0 +1,32 @@
+[
+  {
+    "action": "search_docs",
+    "args": {
+      "query": "出差 住宿 发票 返程",
+      "limit": 6
+    },
+    "basis": "结合对话历史确认追问对象是出差住宿发票。"
+  },
+  {
+    "action": "read_passage",
+    "args": {
+      "doc_id": "D04",
+      "passage_id": "P1"
+    },
+    "basis": "检索结果中的 D04 需要核对原文。"
+  },
+  {
+    "action": "answer",
+    "args": {
+      "answer": "出差住宿发票最晚应在返程后 7 天内提交。",
+      "citations": [
+        {
+          "doc_id": "D04",
+          "passage_id": "P1"
+        }
+      ],
+      "gaps": []
+    },
+    "basis": "已读取支持结论的条款。"
+  }
+]

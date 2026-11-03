@@ -1,0 +1,142 @@
+{
+  "mode": "real",
+  "model": "qwen3.8-flash",
+  "variant": "conflict",
+  "fail_tool": null,
+  "max_steps": 8,
+  "max_tools": 6,
+  "tool_calls": 6,
+  "steps": [
+    {
+      "step": 1,
+      "action": "search_docs",
+      "basis": "用户询问报销期限，需检索相关制度文档以获取具体规定。",
+      "parameters": {
+        "query": "报销期限多久？",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D01",
+            "title": "日常费用报销制度",
+            "version_date": "2025-01-10",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          },
+          {
+            "doc_id": "D02",
+            "title": "日常费用报销规则",
+            "version_date": "2025-03-01",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          }
+        ]
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 2,
+      "action": "read_passage",
+      "basis": "搜索命中两份关于报销期限的制度，需先读取第一份原文以获取具体规定。",
+      "parameters": {
+        "doc_id": "D01",
+        "passage_id": "P1"
+      },
+      "tool_call": true,
+      "observation": {
+        "doc_id": "D01",
+        "version_date": "2025-01-10",
+        "passage_id": "P1",
+        "quote": "日常费用的报销期限为费用发生之日起 30 天，员工应在期限内提交申请。"
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 3,
+      "action": "read_passage",
+      "basis": "搜索命中两份关于报销期限的制度，需读取第二份原文以核对是否存在冲突或补充规定。",
+      "parameters": {
+        "doc_id": "D02",
+        "passage_id": "P1"
+      },
+      "tool_call": true,
+      "observation": {
+        "doc_id": "D02",
+        "version_date": "2025-03-01",
+        "passage_id": "P1",
+        "quote": "日常费用的报销期限为费用发生之日起 15 天，员工应在期限内提交申请。"
+      },
+      "next_action": "search_docs"
+    },
+    {
+      "step": 4,
+      "action": "search_docs",
+      "basis": "两份制度对报销期限规定冲突（30天 vs 15天），需检索是否存在关于制度优先级、适用范围或新旧替代关系的说明，以裁决适用哪一份。",
+      "parameters": {
+        "query": "报销制度 优先级 适用范围 替代关系",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D01",
+            "title": "日常费用报销制度",
+            "version_date": "2025-01-10",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          },
+          {
+            "doc_id": "D02",
+            "title": "日常费用报销规则",
+            "version_date": "2025-03-01",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          }
+        ]
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 5,
+      "action": "read_passage",
+      "basis": "补查未命中新文档，尝试读取D01后续段落以确认是否有适用范围或废止说明。",
+      "parameters": {
+        "doc_id": "D01",
+        "passage_id": "P2"
+      },
+      "tool_call": true,
+      "observation": {
+        "error": "文档或片段不存在。",
+        "type": "tool_error"
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 6,
+      "action": "read_passage",
+      "basis": "D01读取失败，尝试读取D02后续段落以确认是否有适用范围或废止说明。",
+      "parameters": {
+        "doc_id": "D02",
+        "passage_id": "P2"
+      },
+      "tool_call": true,
+      "observation": {
+        "error": "文档或片段不存在。",
+        "type": "tool_error"
+      },
+      "next_action": "answer"
+    },
+    {
+      "step": 7,
+      "action": "answer",
+      "basis": "两份制度对报销期限规定冲突（30天 vs 15天），补查未获新信息且读取后续段落失败，故并列引用两篇原文并指出资料缺口。",
+      "observation": {
+        "status": "answered"
+      }
+    }
+  ],
+  "status": "answered"
+}

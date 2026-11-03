@@ -1,0 +1,59 @@
+{
+  "mode": "real",
+  "model": "qwen3.8-flash",
+  "variant": "clear",
+  "fail_tool": null,
+  "max_steps": 8,
+  "max_tools": 6,
+  "tool_calls": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "search_docs",
+      "basis": "用户询问最晚提交时间，结合历史上下文检索相关制度。",
+      "parameters": {
+        "query": "出差住宿发票提交期限",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D04",
+            "title": "差旅住宿材料说明",
+            "version_date": "2025-02-15",
+            "passage_id": "P1",
+            "summary": "说明出差住宿发票的提交期限。"
+          }
+        ]
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 2,
+      "action": "read_passage",
+      "basis": "搜索命中《差旅住宿材料说明》片段P1，需读取原文以获取具体的提交期限规定。",
+      "parameters": {
+        "doc_id": "D04",
+        "passage_id": "P1"
+      },
+      "tool_call": true,
+      "observation": {
+        "doc_id": "D04",
+        "version_date": "2025-02-15",
+        "passage_id": "P1",
+        "quote": "出差住宿发票须在返程后 7 天内提交。"
+      },
+      "next_action": "answer"
+    },
+    {
+      "step": 3,
+      "action": "answer",
+      "basis": "已读取原文，明确记载了“返程后 7 天内”的提交期限，可直接回答用户关于最晚提交时间的问题。",
+      "observation": {
+        "status": "answered"
+      }
+    }
+  ],
+  "status": "answered"
+}

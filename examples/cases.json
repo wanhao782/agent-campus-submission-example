@@ -1,0 +1,62 @@
+[
+  {
+    "name": "01_clear",
+    "arguments": [
+      "--variant",
+      "clear"
+    ]
+  },
+  {
+    "name": "02_conflict",
+    "arguments": [
+      "--variant",
+      "conflict"
+    ]
+  },
+  {
+    "name": "03_out_of_scope",
+    "arguments": [
+      "--variant",
+      "clear"
+    ]
+  },
+  {
+    "name": "04_paraphrase",
+    "arguments": [
+      "--variant",
+      "clear"
+    ]
+  },
+  {
+    "name": "05_follow_up",
+    "arguments": [
+      "--variant",
+      "clear"
+    ]
+  },
+  {
+    "name": "06_tool_failure",
+    "arguments": [
+      "--variant",
+      "clear",
+      "--fail-tool",
+      "read_passage"
+    ]
+  },
+  {
+    "name": "07_revised",
+    "arguments": [
+      "--variant",
+      "revised"
+    ]
+  },
+  {
+    "name": "08_budget",
+    "arguments": [
+      "--variant",
+      "clear",
+      "--max-tools",
+      "1"
+    ]
+  }
+]

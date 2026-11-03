@@ -1,0 +1,48 @@
+{
+  "mode": "mock",
+  "model": "scripted-mock",
+  "variant": "clear",
+  "fail_tool": null,
+  "max_steps": 8,
+  "max_tools": 6,
+  "tool_calls": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "search_docs",
+      "basis": "根据问题查找相关资料。",
+      "parameters": {
+        "query": "公司是否提供宠物医疗保险？",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": []
+      },
+      "next_action": "search_docs"
+    },
+    {
+      "step": 2,
+      "action": "search_docs",
+      "basis": "首轮没有命中，拆分主题补查。",
+      "parameters": {
+        "query": "宠物 医疗保险 员工福利",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": []
+      },
+      "next_action": "stop"
+    },
+    {
+      "step": 3,
+      "action": "stop",
+      "basis": "补充检索仍无相关资料。",
+      "observation": {
+        "status": "out_of_scope"
+      }
+    }
+  ],
+  "status": "out_of_scope"
+}

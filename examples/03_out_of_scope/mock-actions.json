@@ -1,0 +1,30 @@
+[
+  {
+    "action": "search_docs",
+    "args": {
+      "query": "公司是否提供宠物医疗保险？",
+      "limit": 6
+    },
+    "basis": "根据问题查找相关资料。"
+  },
+  {
+    "action": "search_docs",
+    "args": {
+      "query": "宠物 医疗保险 员工福利",
+      "limit": 6
+    },
+    "basis": "首轮没有命中，拆分主题补查。"
+  },
+  {
+    "action": "stop",
+    "args": {
+      "status": "out_of_scope",
+      "answer": "现有资料无法确认公司是否提供宠物医疗保险。",
+      "citations": [],
+      "gaps": [
+        "缺少相关福利制度。"
+      ]
+    },
+    "basis": "补充检索仍无相关资料。"
+  }
+]

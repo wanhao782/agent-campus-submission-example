@@ -1,0 +1,32 @@
+[
+  {
+    "action": "search_docs",
+    "args": {
+      "query": "报销期限多久？",
+      "limit": 6
+    },
+    "basis": "根据问题查找相关资料。"
+  },
+  {
+    "action": "read_passage",
+    "args": {
+      "doc_id": "D01",
+      "passage_id": "P1"
+    },
+    "basis": "检索结果中的 D01 需要核对原文。"
+  },
+  {
+    "action": "answer",
+    "args": {
+      "answer": "日常费用的报销期限为费用发生之日起 45 天。",
+      "citations": [
+        {
+          "doc_id": "D01",
+          "passage_id": "P1"
+        }
+      ],
+      "gaps": []
+    },
+    "basis": "已读取支持结论的条款。"
+  }
+]

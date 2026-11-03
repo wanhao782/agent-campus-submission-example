@@ -1,0 +1,8 @@
+{
+  "status": "incomplete",
+  "answer": "本次未能完成问答。",
+  "citations": [],
+  "gaps": [
+    "达到工具调用次数上限。"
+  ]
+}

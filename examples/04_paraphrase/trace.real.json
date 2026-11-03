@@ -1,0 +1,73 @@
+{
+  "mode": "real",
+  "model": "qwen3.8-flash",
+  "variant": "clear",
+  "fail_tool": null,
+  "max_steps": 8,
+  "max_tools": 6,
+  "tool_calls": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "search_docs",
+      "basis": "用户询问垫付款报销的最晚时间，需检索相关财务或报销制度文档。",
+      "parameters": {
+        "query": "垫付的钱最晚啥时候能报回来",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": []
+      },
+      "next_action": "search_docs"
+    },
+    {
+      "step": 2,
+      "action": "search_docs",
+      "basis": "首轮搜索无结果，改用更通用的财务术语“垫付款报销时限”进行补搜。",
+      "parameters": {
+        "query": "垫付款报销时限",
+        "limit": 6
+      },
+      "tool_call": true,
+      "observation": {
+        "hits": [
+          {
+            "doc_id": "D01",
+            "title": "日常费用报销制度",
+            "version_date": "2025-01-10",
+            "passage_id": "P1",
+            "summary": "日常费用报销的提交时限。"
+          }
+        ]
+      },
+      "next_action": "read_passage"
+    },
+    {
+      "step": 3,
+      "action": "read_passage",
+      "basis": "搜索命中《日常费用报销制度》片段，需读取原文确认垫付款报销的具体时限规定。",
+      "parameters": {
+        "doc_id": "D01",
+        "passage_id": "P1"
+      },
+      "tool_call": true,
+      "observation": {
+        "doc_id": "D01",
+        "version_date": "2025-01-10",
+        "passage_id": "P1",
+        "quote": "日常费用的报销期限为费用发生之日起 30 天，员工应在期限内提交申请。"
+      },
+      "next_action": "answer"
+    },
+    {
+      "step": 4,
+      "action": "answer",
+      "basis": "已读取原文确认报销时限为费用发生之日起30天，信息完整且无冲突，可直接回答。",
+      "observation": {
+        "status": "answered"
+      }
+    }
+  ],
+  "status": "answered"
+}

@@ -1,0 +1,13 @@
+{
+  "question": "那最晚什么时候交？",
+  "history": [
+    {
+      "role": "user",
+      "content": "我想查询出差住宿发票的提交要求。"
+    },
+    {
+      "role": "assistant",
+      "content": "你想了解出差住宿发票的提交期限吗？"
+    }
+  ]
+}

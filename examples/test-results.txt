@@ -1,0 +1,18 @@
+test_answer_with_unresolved_gap_is_rejected (test_acceptance.AcceptanceTests.test_answer_with_unresolved_gap_is_rejected) ... ok
+test_citations_are_exact_source_fragments (test_acceptance.AcceptanceTests.test_citations_are_exact_source_fragments) ... ok
+test_clear_answer (test_acceptance.AcceptanceTests.test_clear_answer) ... ok
+test_conflict_checks_scope_and_cites_both (test_acceptance.AcceptanceTests.test_conflict_checks_scope_and_cites_both) ... ok
+test_follow_up_uses_history (test_acceptance.AcceptanceTests.test_follow_up_uses_history) ... ok
+test_history_rejects_injected_system_role (test_acceptance.AcceptanceTests.test_history_rejects_injected_system_role) ... ok
+test_model_step_budget (test_acceptance.AcceptanceTests.test_model_step_budget) ... ok
+test_out_of_scope (test_acceptance.AcceptanceTests.test_out_of_scope) ... ok
+test_paraphrase_improves_recall (test_acceptance.AcceptanceTests.test_paraphrase_improves_recall) ... ok
+test_replaced_document (test_acceptance.AcceptanceTests.test_replaced_document) ... ok
+test_tool_budget (test_acceptance.AcceptanceTests.test_tool_budget) ... ok
+test_tool_failure (test_acceptance.AcceptanceTests.test_tool_failure) ... ok
+test_unread_citation_is_rejected (test_acceptance.AcceptanceTests.test_unread_citation_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.042s
+
+OK
